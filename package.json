@@ -1,25 +1,26 @@
 {
-  "name": "starbucks",
+  "name": "redux-boilerplate",
   "version": "0.0.1",
-  "description": "Starbucks internal site",
-  "main": "index.js",
+  "description": "Redux Boilerplate",
+  "main": "client/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Rytass/Starbucks.git"
+    "url": "https://github.com/fantasywind/Redux-Boilerplate.git"
   },
   "keywords": [
-    "starbucks",
+    "redux",
+    "react",
     "rytass"
   ],
   "author": "Chia Yu Pai (Rytass)",
   "private": true,
   "bugs": {
-    "url": "https://github.com/Rytass/Starbucks/issues"
+    "url": "https://github.com/fantasywind/Redux-Boilerplate/issues"
   },
-  "homepage": "https://github.com/Rytass/Starbucks",
+  "homepage": "https://github.com/fantasywind/Redux-Boilerplate",
   "dependencies": {
     "babel-loader": "^6.2.2",
     "babel-plugin-transform-runtime": "^6.5.2",
