@@ -1,7 +1,7 @@
 import React, {
   PropTypes as T,
 } from 'react';
-import radium from 'radium';
+import { StyleRoot } from 'radium';
 
 const styles = {
   container: {
@@ -13,9 +13,9 @@ const styles = {
 
 function App(props) {
   return (
-    <div style={styles.container}>
+    <StyleRoot style={styles.container}>
       {props.children}
-    </div>
+    </StyleRoot>
   );
 }
 
@@ -23,4 +23,4 @@ App.propTypes = {
   children: T.node,
 };
 
-export default radium(App);
+export default App;

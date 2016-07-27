@@ -2,12 +2,11 @@
   "apps": [{
     "cwd": "client",
     "name": "Redux-Boilerplate",
-    "script": "run.js",
+    "script": "runDev.js",
     "env": {
       "NODE_ENV": "development",
       "DEBUG": "Redux:*",
       "PORT": "5100",
     },
-    "next_gen_js": true
-  }]
+  }],
 }

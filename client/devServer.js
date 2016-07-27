@@ -5,8 +5,8 @@ import express from 'express';
 import Debug from 'debug';
 import path from 'path';
 
-const debug = Debug('Starbucks:Client');
-const app = new express();
+const debug = new Debug('Redux:Client');
+const app = express();
 const PORT = process.env.PORT || 5100;
 
 const config = {
@@ -14,7 +14,7 @@ const config = {
   entry: [
     'eventsource-polyfill',
     'webpack-hot-middleware/client',
-    './app.js',
+    path.join(__dirname, 'app.js'),
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -33,6 +33,7 @@ const config = {
     loaders: [{
       test: /\.js$/,
       loaders: [
+        'react-hot',
         'babel',
       ],
       exclude: /node_modules/,
@@ -54,14 +55,14 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-app.use(function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+app.use((req, res) => {
+  res.sendFile(`${__dirname}/index.html`);
 });
 
-app.listen(PORT, function(error) {
+app.listen(PORT, (error) => {
   if (error) {
-    console.error(error)
+    debug(error);
   } else {
-    debug("Starbucks Dev Site Listening on port %s", PORT);
+    debug('Redux Dev Site Listening on port %s', PORT);
   }
 });
