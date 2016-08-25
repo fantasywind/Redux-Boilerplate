@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
+import config from './config';
 import {
   createStore,
   applyMiddleware,
@@ -21,11 +23,17 @@ import {
 import apiMiddleware from './middlewares/apiMiddleware.js';
 import reducers from './reducers';
 
-export const store = createStore(reducers, {}, applyMiddleware(
-  thunk,
-  routerMiddleware(browserHistory),
-  apiMiddleware,
-));
+const logger = createLogger({
+  collapsed: (getState, action) => (action.type.includes('@@router/')),
+});
+
+const middlewares = [thunk, routerMiddleware(browserHistory), apiMiddleware];
+
+if (config.useReduxLog) {
+  middlewares.push(logger);
+}
+
+export const store = createStore(reducers, {}, applyMiddleware(...middlewares));
 
 const history = syncHistoryWithStore(browserHistory, store);
 
