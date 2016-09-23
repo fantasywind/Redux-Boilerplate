@@ -14,7 +14,7 @@ const config = {
   entry: [
     'eventsource-polyfill',
     'webpack-hot-middleware/client',
-    path.join(__dirname, 'app.js'),
+    path.join(__dirname, 'entry.js'),
   ],
   output: {
     path: path.join(__dirname, 'dist'),

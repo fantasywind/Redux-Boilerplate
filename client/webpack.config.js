@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'eventsource-polyfill',
-    path.join(__dirname, './app.js'),
+    path.join(__dirname, './entry.js'),
   ],
   output: {
     path: path.join(__dirname, '../build'),
