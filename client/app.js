@@ -1,7 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component, PropTypes as T } from 'react';
 import { Provider } from 'react-redux';
-import store from './store/configureStore';
 import {
   Router,
   Route,
@@ -10,18 +8,29 @@ import {
 } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-
 // Boards
-import App from './components/App.js';
+import AppPage from './components/App.js';
 import LandingPage from './components/LandingPage.js';
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={syncHistoryWithStore(browserHistory, store)}>
-      <Route path="/" component={App}>
-        <IndexRoute component={LandingPage} />
-      </Route>
-    </Router>
-  </Provider>,
-  document.getElementById('root'),
-);
+class App extends Component {
+  render() {
+    const {
+      store
+    } = this.props;
+    return (
+      <Provider store={store}>
+        <Router history={syncHistoryWithStore(browserHistory, store)}>
+          <Route path="/" component={AppPage}>
+            <IndexRoute component={LandingPage} />
+          </Route>
+        </Router>
+      </Provider>
+    );
+  }
+}
+
+App.propTypes = {
+  store: T.object.isRequired,
+};
+
+export default App;

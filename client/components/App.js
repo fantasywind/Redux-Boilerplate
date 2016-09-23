@@ -12,7 +12,6 @@ const styles = {
 };
 
 function App(props) {
-
   return (
     <StyleRoot style={styles.container}>
       {props.children}
