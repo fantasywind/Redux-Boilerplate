@@ -2,7 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import _debug from 'debug';
 
-const debug = _debug('EMBA:Build');
+const debug = _debug('Redux-Bolierplate:Build');
 
 debug('Start Build Source...');
 

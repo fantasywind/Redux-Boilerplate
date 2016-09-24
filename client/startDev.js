@@ -7,10 +7,10 @@ import debug from 'debug';
 import opn from 'opn';
 // import proxy from 'http-proxy-middleware';
 
-const debugServer = debug('EMBA:DevServer');
+const debugServer = debug('Redux-Bolierplate:DevServer');
 
 const PORT = process.env.DEV_PORT || process.env.PORT || 8300;
-const DEV_API_HOST = process.env.DEV_API_HOST || 'http://localhost:8200';
+// const DEV_API_HOST = process.env.DEV_API_HOST || 'http://localhost:8200';
 const app = express();
 
 const webpackConfig = webpack({
