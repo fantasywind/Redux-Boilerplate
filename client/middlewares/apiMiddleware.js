@@ -1,5 +1,7 @@
 /* global API_HOST:false */
-import _ from 'lodash';
+import omit from 'lodash/omit';
+import forEach from 'lodash/forEach';
+import isArray from 'lodash/isArray';
 
 export const API_REQUEST = Symbol('API_REQUEST');
 export const NO_TOKEN_STORED = Symbol('NO_TOKEN_STORED');
@@ -23,7 +25,7 @@ export default () => next => async action => {
     onFailed,
   } = requestOptions;
 
-  const dispatchPayload = _.omit((requestOptions.dispatchPayload || {}), 'type');
+  const dispatchPayload = omit((requestOptions.dispatchPayload || {}), 'type');
 
   const [
     successType,
@@ -61,7 +63,7 @@ export default () => next => async action => {
   // FormData
   if (formData) {
     fetchOptions.body = new FormData();
-    _.forEach(body, (val, key) => {
+    forEach(body, (val, key) => {
       if (val) {
         if (val instanceof FileList) {
           [].forEach.call(val, (file) => fetchOptions.body.append(key, file));
@@ -125,7 +127,7 @@ export default () => next => async action => {
     return console.error(error);
   }
 
-  if (_.isArray(response)) {
+  if (isArray(response)) {
     next({
       type: successType,
       list: response,
