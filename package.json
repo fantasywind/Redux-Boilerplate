@@ -37,6 +37,7 @@
     "express": "^4.13.4",
     "file-loader": "^0.8.5",
     "http-proxy-middleware": "^0.17.1",
+    "humps": "^1.1.0",
     "i18next": "^3.4.3",
     "i18next-browser-languagedetector": "^1.0.0",
     "i18next-localstorage-cache": "^0.3.0",
