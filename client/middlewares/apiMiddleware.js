@@ -3,7 +3,7 @@ import omit from 'lodash/omit';
 import forEach from 'lodash/forEach';
 import isArray from 'lodash/isArray';
 import { camelizeKeys } from 'humps';
-
+import { normalize } from 'normalizr';
 export const API_REQUEST = Symbol('API_REQUEST');
 export const NO_TOKEN_STORED = Symbol('NO_TOKEN_STORED');
 
@@ -24,15 +24,22 @@ export default () => next => async action => {
     method,
     onSuccess,
     onFailed,
+    schema,
   } = requestOptions;
 
   const dispatchPayload = omit((requestOptions.dispatchPayload || {}), 'type');
 
-  const [
-    successType,
-    errorType,
-    requestType,
-  ] = types;
+
+  if (!Array.isArray(types) || types.length !== 3) {
+    throw new Error('Expected an array of three action types.');
+  }
+
+  if (!types.every(type => typeof type === 'string')) {
+    throw new Error('Expected action types to be strings.');
+  }
+
+  const [successType, errorType, requestType] = types;
+
 
   // Fetch Endpoint
   const fetchOptions = {
@@ -90,10 +97,10 @@ export default () => next => async action => {
     response = await fetch(`${API_HOST}${entrypoint}`, fetchOptions);
     if (response.ok) {
       if (response.status !== 204) {
-        response = camelizeKeys(await response.json());
+        response = normalize(camelizeKeys(await response.json()), schema);
       }
     } else {
-      response = camelizeKeys(await response.json());
+      response = normalize(camelizeKeys(await response.json()), schema);
 
       next({
         type: errorType,
