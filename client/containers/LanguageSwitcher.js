@@ -1,4 +1,5 @@
 import React, { Component, PropTypes as T } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import radium from 'radium';
 import { changeLanguage } from '../acitons/Language';
@@ -6,14 +7,14 @@ import { changeLanguage } from '../acitons/Language';
 class LanguageSwitcher extends Component {
 
   componentWillMount() {
-    const { language, dispatch } = this.props;
-    if (!language) dispatch(changeLanguage('en'));
+    const { language, changeLanguage } = this.props;
+    if (!language) changeLanguage('en');
   }
 
   handleChange = (language) => (e) => {
     e.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(changeLanguage(language));
+    const { changeLanguage } = this.props;
+    changeLanguage(language);
   };
 
 
@@ -35,4 +36,6 @@ LanguageSwitcher.propTypes = {
 
 const mapStateToProps = (state) => ({ language: state.Language.language });
 
-export default connect(mapStateToProps)(radium(LanguageSwitcher));
+export default connect(mapStateToProps, {
+  changeLanguage,
+})(radium(LanguageSwitcher));
