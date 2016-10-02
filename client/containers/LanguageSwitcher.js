@@ -1,8 +1,7 @@
 import React, { Component, PropTypes as T } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import radium from 'radium';
-import { changeLanguage } from '../acitons/Language';
+import { changeLanguage as changeLanguageAction } from '../acitons/Language';
 
 class LanguageSwitcher extends Component {
 
@@ -30,12 +29,12 @@ class LanguageSwitcher extends Component {
 }
 
 LanguageSwitcher.propTypes = {
-  dispatch: T.func,
+  changeLanguage: T.func,
   language: T.string,
 };
 
 const mapStateToProps = (state) => ({ language: state.Language.language });
 
 export default connect(mapStateToProps, {
-  changeLanguage,
+  changeLanguage: changeLanguageAction,
 })(radium(LanguageSwitcher));
