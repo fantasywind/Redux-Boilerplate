@@ -28,11 +28,17 @@ export default () => next => async action => {
 
   const dispatchPayload = omit((requestOptions.dispatchPayload || {}), 'type');
 
-  const [
-    successType,
-    errorType,
-    requestType,
-  ] = types;
+
+  if (!Array.isArray(types) || types.length !== 3) {
+    throw new Error('Expected an array of three action types.');
+  }
+
+  if (!types.every(type => typeof type === 'string')) {
+    throw new Error('Expected action types to be strings.');
+  }
+
+  const [successType, errorType, requestType] = types;
+
 
   // Fetch Endpoint
   const fetchOptions = {

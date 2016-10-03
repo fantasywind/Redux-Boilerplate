@@ -8,6 +8,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from '../libs/i18n/';
 
 export default class Root extends Component {
+
   render() {
     const { store, history } = this.props;
     return (

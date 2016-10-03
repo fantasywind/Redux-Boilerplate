@@ -3,11 +3,11 @@ import { Route, IndexRoute } from 'react-router';
 
 
 
-import AppPage from './components/App';
+import App from './components/App';
 import LandingPage from './components/LandingPage';
 
 export default (
-  <Route path="/" component={AppPage}>
+  <Route path="/" component={App}>
     <IndexRoute component={LandingPage} />
   </Route>
 );
