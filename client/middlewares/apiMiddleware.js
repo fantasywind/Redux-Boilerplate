@@ -3,7 +3,7 @@ import omit from 'lodash/omit';
 import forEach from 'lodash/forEach';
 import isArray from 'lodash/isArray';
 import { camelizeKeys } from 'humps';
-import { normalize } from 'normalizr';
+
 export const API_REQUEST = Symbol('API_REQUEST');
 export const NO_TOKEN_STORED = Symbol('NO_TOKEN_STORED');
 
@@ -24,7 +24,6 @@ export default () => next => async action => {
     method,
     onSuccess,
     onFailed,
-    schema,
   } = requestOptions;
 
   const dispatchPayload = omit((requestOptions.dispatchPayload || {}), 'type');
@@ -97,10 +96,10 @@ export default () => next => async action => {
     response = await fetch(`${API_HOST}${entrypoint}`, fetchOptions);
     if (response.ok) {
       if (response.status !== 204) {
-        response = normalize(camelizeKeys(await response.json()), schema);
+        response = camelizeKeys(await response.json());
       }
     } else {
-      response = normalize(camelizeKeys(await response.json()), schema);
+      response = camelizeKeys(await response.json());
 
       next({
         type: errorType,
