@@ -28,6 +28,7 @@ const webpackConfig = webpack({
   plugins: [
     new webpack.DefinePlugin({
       API_HOST: `"${process.env.API_HOST || '/api'}"`,
+      API_VERSION: `"${process.env.API_VERSION || '0.0.0'}"`,
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
