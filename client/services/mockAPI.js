@@ -1,4 +1,4 @@
-import mockData from './mockData/';
+import { userFakeData } from './mockData/';
 import config from '../config';
 import has from 'lodash/has';
 
@@ -26,3 +26,9 @@ export const mockRequest = (methodName, payload) => {
 
 export const getUser = (payload) => mockRequest('getUser', payload);
 export const postLogin = (payload) => mockRequest('postLogin', payload);
+
+const testGitHubUser = () => successPromise(userFakeData);
+
+export default {
+  testGitHubUser,
+};

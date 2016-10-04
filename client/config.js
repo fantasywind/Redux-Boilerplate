@@ -9,5 +9,9 @@ export default {
     browserLanguagedetector: true,
     localStorageCache: false,
     debug: false,
+  },
+  api: {
+    version: API_VERSION,
+    host: API_HOST,
   }
 };

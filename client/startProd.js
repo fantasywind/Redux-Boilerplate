@@ -20,6 +20,7 @@ webpack({
   plugins: [
     new webpack.DefinePlugin({
       API_HOST: `"${process.env.API_HOST || '/api'}"`,
+      API_VERSION: `"${process.env.API_VERSION || '0.0.0'}"`,
       'process.env.NODE_ENV': '"production"',
     }),
     new webpack.optimize.UglifyJsPlugin(),
