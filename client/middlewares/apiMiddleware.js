@@ -92,7 +92,7 @@ export default () => next => async action => {
         fetchOptions,
       });
     }
-
+    console.log("API_HOST", API_HOST);
     response = await fetch(`${API_HOST}${entrypoint}`, fetchOptions);
     if (response.ok) {
       if (response.status !== 204) {

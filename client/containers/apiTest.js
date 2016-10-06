@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux';
 import radium from 'radium';
-import { sampleActionAsync as gitAPIAction } from '../acitons/sampleAction';
+import { fetchGithubUser as gitAPIAction } from '../acitons/Github';
 
 class ApiTest extends Component {
   componentWillMount() {

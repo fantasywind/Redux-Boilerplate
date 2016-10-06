@@ -4,8 +4,8 @@
   "description": "Redux Boilerplate",
   "main": "client/app.js",
   "scripts": {
-    "testFac": "babel-node client/services/factory_test.js", 
-    "dev": "NODE_ENV=development DEBUG=Redux:* PORT=5100 babel-node client/startDev.js",
+    "testFac": "babel-node client/services/factory_test.js",
+    "dev": "NODE_ENV=development DEBUG=Redux:* API_HOST=https://api.github.com/ PORT=5100 babel-node client/startDev.js",
     "build": "NODE_ENV=production babel-node client/startProd.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
