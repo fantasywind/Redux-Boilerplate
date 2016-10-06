@@ -88,6 +88,7 @@ export default () => next => async action => {
     if (requestType) {
       next({
         type: requestType,
+        waiting: true,
         entrypoint,
         fetchOptions,
       });
@@ -104,12 +105,10 @@ export default () => next => async action => {
       next({
         type: errorType,
         error: response.message,
-        ...response,
+        payload: response,
       });
 
-      if (onFailed) {
-        onFailed(response.message);
-      }
+      if (onFailed) onFailed(response.message);
 
       return true;
     }
@@ -120,16 +119,11 @@ export default () => next => async action => {
         error,
       });
 
-      if (onFailed) {
-        onFailed(error);
-      }
-
+      if (onFailed) onFailed(error);
       return true;
     }
 
-    if (onFailed) {
-      onFailed(error);
-    }
+    if (onFailed) onFailed(error);
 
     return console.error(error);
   }
@@ -152,9 +146,10 @@ export default () => next => async action => {
     onSuccess(response);
   }
 
-  return next({
+  next({
     type: successType,
     ...dispatchPayload,
-    ...response,
+    payload: response,
   });
+  return true;
 };

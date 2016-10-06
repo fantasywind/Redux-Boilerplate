@@ -11,7 +11,7 @@ export default {
     debug: false,
   },
   api: {
-    version: API_VERSION,
+    version: API_VERSION || null,
     host: API_HOST,
   }
 };
