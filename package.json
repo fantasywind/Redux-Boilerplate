@@ -4,10 +4,11 @@
   "description": "Redux Boilerplate",
   "main": "client/app.js",
   "scripts": {
-    "testFac": "babel-node client/services/factory_test.js", 
+    "testFac": "babel-node client/services/factory_test.js",
     "dev": "NODE_ENV=development DEBUG=Redux:* PORT=5100 babel-node client/startDev.js",
     "build": "NODE_ENV=production babel-node client/startProd.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test0": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha -t 15000 ./client/test/.setup.js ./client/test/**/*-test.js"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,9 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.5.0",
     "babel-runtime": "^6.11.6",
+    "chai": "^3.5.0",
     "debug": "^2.2.0",
+    "enzyme": "^2.4.1",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.4",
     "faker": "^3.1.0",
@@ -51,6 +54,7 @@
     "opn": "^4.0.2",
     "radium": "^0.18.1",
     "react": "^15.2.1",
+    "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.2.1",
     "react-i18next": "^1.10.0",
     "react-redux": "^4.4.5",
