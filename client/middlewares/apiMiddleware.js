@@ -105,7 +105,7 @@ export default () => next => async action => {
       next({
         type: errorType,
         error: response.message,
-        ...response,
+        payload: response,
       });
 
       if (onFailed) onFailed(response.message);

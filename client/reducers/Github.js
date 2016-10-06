@@ -22,5 +22,14 @@ export default createReducer(INITIAL_STATE, {
       waiting,
     };
   },
+  [Types.GITHUB_USER_FAILED]: (state = INITIAL_STATE, action) => {
+    const { error, payload } = action;
+    return {
+      ...state,
+      waiting: false,
+      error,
+      payload,
+    };
+  },
 
 });

@@ -18,10 +18,10 @@ class Github extends Component {
     });
   }
 
-  handleChange = (userName) => (e) => {
+  handleChange = (e) => {
     e.preventDefault();
     const { fetchGithubUser } = this.props;
-    fetchGithubUser(userName);
+    fetchGithubUser(this.inputFiled.value);
   };
 
 
@@ -32,7 +32,8 @@ class Github extends Component {
     } = this.state;
     return (
       <div>
-        <button onClick={this.handleChange('wjwang')}>FETCH</button>
+        <input ref={(c) => this.inputFiled = c} />
+        <button onClick={this.handleChange}>FETCH</button>
         <div>
           {
             waiting && <p>Loading...</p>
