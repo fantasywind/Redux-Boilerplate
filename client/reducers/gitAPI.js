@@ -1,9 +1,8 @@
 import { createReducer } from 'reduxsauce';
-import { Types } from '../acitons/sampleAction';
-import i18n from '../libs/i18n/';
+import { Types } from '../actions/sampleAction';
 
 const INITIAL_STATE = {
-  userInfo: "",
+  userInfo: '',
 };
 
 export default createReducer(INITIAL_STATE, {

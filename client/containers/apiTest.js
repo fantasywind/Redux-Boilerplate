@@ -1,7 +1,8 @@
 import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux';
 import radium from 'radium';
-import { sampleActionAsync as gitAPIAction } from '../acitons/sampleAction';
+import { sampleActionAsync as gitAPIAction } from '../actions/sampleAction';
+import Test from '../components/Test.js';
 
 class ApiTest extends Component {
   componentWillMount() {
@@ -20,6 +21,7 @@ class ApiTest extends Component {
         <textarea
           style={style.textarea} ref={(c) => this.textarea1 = c} rows="4" cols="50"
           value={this.props.userInfo} />
+        <Test name={'test'} />
       </div>
     );
   }

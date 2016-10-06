@@ -1,5 +1,5 @@
 import { createReducer } from 'reduxsauce';
-import { Types } from '../acitons/Language';
+import { Types } from '../actions/Language';
 import i18n from '../libs/i18n/';
 
 const INITIAL_STATE = {
