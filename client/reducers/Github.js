@@ -1,16 +1,25 @@
 import { createReducer } from 'reduxsauce';
-import { Types } from '../acitons/Github';
+import { Types } from '../actions/Github';
 
 const INITIAL_STATE = {
-  list: [],
+  payload: null,
+  waiting: false,
 };
 
 export default createReducer(INITIAL_STATE, {
   [Types.GITHUB_USER_SUCCESS]: (state = INITIAL_STATE, action) => {
-    const { list } = action;
+    const { payload } = action;
     return {
       ...state,
-      list,
+      waiting: false,
+      payload,
+    };
+  },
+  [Types.GITHUB_USER_PROCESSING]: (state = INITIAL_STATE, action) => {
+    const { waiting } = action;
+    return {
+      ...state,
+      waiting,
     };
   },
 

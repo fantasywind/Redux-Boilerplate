@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux';
 import radium from 'radium';
-import { changeLanguage as changeLanguageAction } from '../acitons/Language';
+import { changeLanguage as changeLanguageAction } from '../actions/Language';
 
 class LanguageSwitcher extends Component {
 

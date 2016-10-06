@@ -88,11 +88,12 @@ export default () => next => async action => {
     if (requestType) {
       next({
         type: requestType,
+        waiting: true,
         entrypoint,
         fetchOptions,
       });
     }
-    console.log("API_HOST", API_HOST);
+
     response = await fetch(`${API_HOST}${entrypoint}`, fetchOptions);
     if (response.ok) {
       if (response.status !== 204) {
@@ -107,9 +108,7 @@ export default () => next => async action => {
         ...response,
       });
 
-      if (onFailed) {
-        onFailed(response.message);
-      }
+      if (onFailed) onFailed(response.message);
 
       return true;
     }
@@ -120,16 +119,11 @@ export default () => next => async action => {
         error,
       });
 
-      if (onFailed) {
-        onFailed(error);
-      }
-
+      if (onFailed) onFailed(error);
       return true;
     }
 
-    if (onFailed) {
-      onFailed(error);
-    }
+    if (onFailed) onFailed(error);
 
     return console.error(error);
   }
@@ -152,9 +146,10 @@ export default () => next => async action => {
     onSuccess(response);
   }
 
-  return next({
+  next({
     type: successType,
     ...dispatchPayload,
-    ...response,
+    payload: response,
   });
+  return true;
 };
