@@ -5,7 +5,7 @@ import _debug from 'debug';
 const debug = _debug('Redux-Bolierplate:Build');
 
 debug('Start Build Source...');
-
+console.log('Start Build Source...');
 webpack({
   devtool: false,
   entry: [
@@ -46,6 +46,7 @@ webpack({
   if (err) {
     debug(err);
   } else {
+    console.log('Build Successful!');
     debug('Build Successful!');
   }
 });
