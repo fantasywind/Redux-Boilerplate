@@ -1,0 +1,35 @@
+import facker from 'facker';
+// read schema and field name, type => generate js object or json
+
+export const userFakeData = {
+  login: "WJWang",
+  id: 2817235,
+  avatar_url: "https://avatars.githubusercontent.com/u/2817235?v=3",
+  gravatar_id: "",
+  url: "https://api.github.com/users/WJWang",
+  html_url: "https://github.com/WJWang",
+  followers_url: "https://api.github.com/users/WJWang/followers",
+  following_url: "https://api.github.com/users/WJWang/following{/other_user}",
+  gists_url: "https://api.github.com/users/WJWang/gists{/gist_id}",
+  starred_url: "https://api.github.com/users/WJWang/starred{/owner}{/repo}",
+  subscriptions_url: "https://api.github.com/users/WJWang/subscriptions",
+  organizations_url: "https://api.github.com/users/WJWang/orgs",
+  repos_url: "https://api.github.com/users/WJWang/repos",
+  events_url: "https://api.github.com/users/WJWang/events{/privacy}",
+  received_events_url: "https://api.github.com/users/WJWang/received_events",
+  type: "User",
+  site_admin: false,
+  name: "William Wang(Wei)",
+  company: "Rytass",
+  blog: "http://wjwang-blog.logdown.com/",
+  location: "Taipei Taiwan",
+  email: "shadow25251@gmail.com",
+  hireable: true,
+  bio: null,
+  public_repos: 45,
+  public_gists: 4,
+  followers: 19,
+  following: 41,
+  created_at: "2012-11-16T22:00:44Z",
+  updated_at: "2016-10-03T03:24:15Z"
+};

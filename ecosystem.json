@@ -2,11 +2,14 @@
   "apps": [{
     "cwd": "client",
     "name": "Redux-Boilerplate",
-    "script": "runDev.js",
+    "script": "startDev.js",
+    "interpreter": "../node_modules/.bin/babel-node",
     "env": {
+      "PORT": 8300,
       "NODE_ENV": "development",
       "DEBUG": "Redux:*",
-      "PORT": "5100",
+      "DEV_API_HOST": "http://localhost:8200",
+      "API_HOST": "/api",
     },
   }],
 }

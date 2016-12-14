@@ -1,5 +1,8 @@
 /* global API_HOST:false */
-import _ from 'lodash';
+import omit from 'lodash/omit';
+import forEach from 'lodash/forEach';
+import isArray from 'lodash/isArray';
+import { camelizeKeys } from 'humps';
 
 export const API_REQUEST = Symbol('API_REQUEST');
 export const NO_TOKEN_STORED = Symbol('NO_TOKEN_STORED');
@@ -23,13 +26,19 @@ export default () => next => async action => {
     onFailed,
   } = requestOptions;
 
-  const dispatchPayload = _.omit((requestOptions.dispatchPayload || {}), 'type');
+  const dispatchPayload = omit((requestOptions.dispatchPayload || {}), 'type');
 
-  const [
-    successType,
-    errorType,
-    requestType,
-  ] = types;
+
+  if (!Array.isArray(types) || types.length !== 3) {
+    throw new Error('Expected an array of three action types.');
+  }
+
+  if (!types.every(type => typeof type === 'string')) {
+    throw new Error('Expected action types to be strings.');
+  }
+
+  const [successType, errorType, requestType] = types;
+
 
   // Fetch Endpoint
   const fetchOptions = {
@@ -61,7 +70,7 @@ export default () => next => async action => {
   // FormData
   if (formData) {
     fetchOptions.body = new FormData();
-    _.forEach(body, (val, key) => {
+    forEach(body, (val, key) => {
       if (val) {
         if (val instanceof FileList) {
           [].forEach.call(val, (file) => fetchOptions.body.append(key, file));
@@ -79,6 +88,7 @@ export default () => next => async action => {
     if (requestType) {
       next({
         type: requestType,
+        waiting: true,
         entrypoint,
         fetchOptions,
       });
@@ -87,20 +97,18 @@ export default () => next => async action => {
     response = await fetch(`${API_HOST}${entrypoint}`, fetchOptions);
     if (response.ok) {
       if (response.status !== 204) {
-        response = await response.json();
+        response = camelizeKeys(await response.json());
       }
     } else {
-      response = await response.json();
+      response = camelizeKeys(await response.json());
 
       next({
         type: errorType,
         error: response.message,
-        ...response,
+        payload: response,
       });
 
-      if (onFailed) {
-        onFailed(response.message);
-      }
+      if (onFailed) onFailed(response.message);
 
       return true;
     }
@@ -111,21 +119,16 @@ export default () => next => async action => {
         error,
       });
 
-      if (onFailed) {
-        onFailed(error);
-      }
-
+      if (onFailed) onFailed(error);
       return true;
     }
 
-    if (onFailed) {
-      onFailed(error);
-    }
+    if (onFailed) onFailed(error);
 
     return console.error(error);
   }
 
-  if (_.isArray(response)) {
+  if (isArray(response)) {
     next({
       type: successType,
       list: response,
@@ -143,9 +146,10 @@ export default () => next => async action => {
     onSuccess(response);
   }
 
-  return next({
+  next({
     type: successType,
     ...dispatchPayload,
-    ...response,
+    payload: response,
   });
+  return true;
 };
